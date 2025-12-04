@@ -1,0 +1,204 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+    background-color: #2F4F4F;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+}
+
+header {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+header button {
+    padding: 10px 20px;
+    background: #E0FFFF;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+header button:hover {
+    background: #cceeff;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+#leftPanel, #content, #rightPanel {
+    padding: 20px;
+    overflow-y: auto;
+}
+
+#leftPanel {
+    width: 33%;
+    background: #ffe4e1; 
+}
+
+#content {
+    width: 34%;
+    background: #ffffff;
+}
+
+#rightPanel {
+    width: 33%;
+    background: #f0fff0;
+}
+
+h2, h3 {
+    margin-bottom: 15px;
+    color: black;
+    text-align: center;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 0;
+}
+
+.search-box button {
+    width: 50%;
+    display: block;
+    margin: 0 auto;
+    padding: 10px;
+    background: #E0FFFF;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background: #2F4F4F;
+    color: white;
+    cursor: pointer;
+}
+
+tr:hover {
+    background-color: #f0f0f0;
+}
+
+.highlight {
+    background-color: #fff3cd;
+}
+
+.delete-btn {
+    padding: 5px 10px;
+    background: #E0FFFF;
+    border: 1px solid #ccc;
+    border-radius: 0;
+    cursor: pointer;
+}
+
+.edit-checkbox {
+    width: 100px;
+    height: 100px;
+    background: white;
+    margin: 0 auto 20px;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 1px solid #ccc;
+}
+
+.edit-checkbox label {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.score-display {
+    text-align: center;
+    background: #2F4F4F;
+    color: white;
+    padding: 15px;
+    border-radius: 0;
+    margin-bottom: 20px;
+}
+
+#totalScore {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.loader {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.no-users {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.no-users button {
+    padding: 10px 20px;
+    background: #E0FFFF;
+    border: 1px solid #ccc;
+    border-radius: 0;
+    cursor: pointer;
+}
+
+footer {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+footer ul {
+    list-style: none;
+}
