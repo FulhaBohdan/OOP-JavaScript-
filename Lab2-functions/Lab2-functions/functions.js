@@ -1,274 +1,163 @@
-'''import math
+// Task 1
+function average(...args) {
+    if (args.length === 0) return 0;
+    const sum = args.reduce((acc, current) => acc + current, 0);
+    return sum / args.length;
+};
 
+console.log(average(10, 20, 30));
+console.log(average(5, 15));
 
-class Shape:
-    def __init__(self, color):
-        self.__color=color
-    def __str__(self):
-        return self.__color
+// Task 2
+function values(f, low, high) {
+    const results = [];
+    for (let i = low; i <= high; i++) {
+        results.push(f(i));
+    };
+    return results;
+};
 
-class Circle(Shape):
-        def __init__(self, color, radius,stile,line_thichness,corners, opacity):
-            super().__init__(color)
-            self.__radius = radius
-            self.__stile = stile
-            self.__line_thichness = line_thichness
-            self.__corners=corners
-            self.__opacity = opacity
-        def __str__(self):
-                return f'Circle with radius {self.__radius} and color {self.__color} {self.__stile } { self.__line_thichness}'
-        def area (self):
-            return (self.__radius * self.__radius)
-        def perimeter (self):
-            return (self.__radius * 2)
-        def __eq__(self,other):
-            return self.__color == other.__color
-        def __ne__(self,other):
-            return self.__color != other.__color
-        def __gt__(self,other):
-            return self.__color > other.__color
-        def __ge__(self,other):
-            return self.__color >= other.__color
-        def __le__(self,other):
-            return self.__color <= other.__color
-        def __lt__(self,other):
-            return self.__color < other.__color
-        def __add__(self,other):
-class Rectangle(Shape):
-    def __init__(self,color,width,height,stile,line_thichness,corners,opacity):
-        super().__init__(color)
-        self.__width = width
-        self.__height = height
-        self.__stile = stile
-        self.__line_thichness = line_thichness
-        self.__corners=corners
-        self.__opacity = opacity
-    def area (self):
-            return (self.__width * self.__height )
-    def perimeter (self):
-            return ((self.__width + self.__height) *2 )
-class Triangle (Shape):
-    def __init__(self,color,side1,side2,side3,stile,line_thichness,corners,opacity):
-        super().__init__(color)
-        self.__side1 = side1
-        self.__side2 = side2
-        self.__side3 = side3
-        self.__stile = stile
-        self.__line_thichness = line_thichness
-        self.__corners=corners
-        self.__opacity = opacity
-    def __str__(self):
-        return f'{self.__side1},{self.__side2},{self.__side3},{self.stile},{self.line_thichness},{self.corners},{self.opacity}'
+const square = (x) => x * x;
+console.log(values(square, 2, 5));
 
-    def area (self):
-       s = (self.__side1  + self.__side2   + self.__side3 ) / 2
-        area = math.sqrt(s * (s - self.__side1) * (s -self.__side2 ) * (s - self.__side3))
-       return area
-    def perimeter (self):
-           return = (self.__side1 + self.__side2 + self.__side3)
-def total_area(shapes):
-    total = 0
-    for shape in shapes:
-        total += shape.area()
-    return total''''''
+// Task 3
+function callWithContext(obj, callback) {
+    callback.call(obj);
+};
 
-'''
-from turtle import *
-import math
-class Shape:
-    """Базовий клас для геометричних фігур."""
-    def __init__(self, color):
-        self.__color = color
+const person = { name: 'Bohdan', age: 20 };
 
-    def __str__(self):
-        return f"Color: {self.__color}"
+function birthdayGreeting() {
+    const date = new Date().toLocaleDateString();
+    console.log(`Today is ${date}! Happy birthday ${this.name}.`);
+};
 
-    @property
-    def color(self):
-        return self.__color
+callWithContext(person, birthdayGreeting);
 
+// Task 4
+function createCounter() {
+    let count = 0;
+    return {
+        increment: function() {
+            count++;
+        },
+        getValue: function() {
+            return count;
+        }
+    };
+};
 
-class Circle(Shape):
-    """Клас для представлення кола."""
-    def __init__(self, color, radius, style, line_thickness, corners, opacity):
-        super().__init__(color)
-        self.__radius = radius
-        self.__style = style
-        self.__line_thickness = line_thickness
-        self.__corners = corners
-        self.__opacity = opacity
+const counter = createCounter();
+counter.increment();
+counter.increment();
+console.log(counter.getValue());
 
-    @property
-    def radius(self):
-        return self.__radius
+// Task 5
+const getGreeting = (function() {
+    let lastArg = null;
+    let lastResult = null;
 
-    @property
-    def style(self):
-        return self.__style
+    return function(name) {
+        if (name === lastArg) {
+            console.log('(from cache)');
+            return lastResult;
+        };
+        
+        lastArg = name;
+        lastResult = `Hello ${name}`;
+        console.log('(calculated)');
+        return lastResult;
+    };
+})();
 
-    def area(self):
-        """Обчислює площу кола."""
-        return math.pi * self.__radius ** 2
+console.log(getGreeting('Bohdan'));
+console.log(getGreeting('Bohdan'));
+console.log(getGreeting('Vlad'));
 
-    def perimeter(self):
-        """Обчислює периметр кола."""
-        return 2 * math.pi * self.__radius
+// Task 6
+function sumCurry(a) {
+    return function(b) {
+        return a + b;
+    };
+};
 
-    def __str__(self):
-        return f"Circle(radius={self.radius}, style={self.style}, {super().__str__()})"
+const addTen = sumCurry(10);
+console.log(addTen(5));
+console.log(sumCurry(2)(3));
 
-    def __eq__(self, other):
-        if not isinstance(other, Shape):
-            return NotImplemented
-        return self.area() == other.area()
+// Task 7
+function createFilter(arr) {
+    return function(text) {
+        return arr.includes(text);
+    };
+};
 
-    def __lt__(self, other):
-        if not isinstance(other, Shape):
-            return NotImplemented
-        return self.area() < other.area()
+const fruits = ['apple', 'banana', 'orange'];
+const hasFruit = createFilter(fruits);
 
-    def __gt__(self, other):
-        if not isinstance(other, Shape):
-            return NotImplemented
-        return self.area() > other.area()
+console.log(hasFruit('banana'));
+console.log(hasFruit('cherry'));
 
+// Task 8
+const capitalizeProperty = (arr, prop) => {
+    return arr.map(obj => ({
+        ...obj,
+        [prop]: obj[prop].charAt(0).toUpperCase() + obj[prop].slice(1)
+    }));
+};
 
-circle(30)
-speed(0.0002)
-width(1)
-ht()
-right(90)
-forward(25)
+const usersList = [{ name: 'oleg' }, { name: 'petro' }];
+console.log(capitalizeProperty(usersList, 'name'));
 
-write("circle")
+// Task 9
+function introduce(greeting) {
+    console.log(`${greeting}, my name is ${this.name}`);
+};
 
+const student = { name: 'Ivan' };
+const employee = { name: 'Maria' };
 
+introduce.call(student, 'Hi'); // Call
+introduce.apply(employee, ['Hello']); // Apply
+const boundIntroduce = introduce.bind(student); // Bind
+boundIntroduce('Greetings');
 
+// Task 10
+function logExecution(callback, ...args) {
+    const time = new Date().toLocaleTimeString();
+    console.log(`Function: ${callback.name}, Args: [${args}], Time: ${time}`);
+    return callback(...args);
+};
 
-class Rectangle(Shape):
-    """Клас для представлення прямокутника."""
-    def __init__(self, color, width, height, style, line_thickness, corners, opacity):
-        super().__init__(color)
-        self.__width = width
-        self.__height = height
-        self.__style = style
-        self.__line_thickness = line_thickness
-        self.__corners = corners
-        self.__opacity = opacity
+function multiply(a, b) {
+    return a * b;
+};
 
-    @property
-    def width(self):
-        return self.__width
+logExecution(multiply, 5, 6);
 
-    @property
-    def height(self):
-        return self.__height
+// Task 11
+function cacheWithTimeout(fn, timeout) {
+    let cache = null;
+    let lastCallTime = 0;
 
-    @property
-    def style(self):
-        return self.__style
+    return function(...args) {
+        const now = Date.now();
+        if (cache !== null && (now - lastCallTime < timeout)) {
+            console.log('Returning cached value');
+            return cache;
+        };
 
-    def area(self):
-        """Обчислює площу прямокутника."""
-        return self.__width * self.__height
+        const result = fn(...args);
+        cache = result;
+        lastCallTime = now;
+        console.log('Calculating new value');
+        return result;
+    };
+};
 
-    def perimeter(self):
-        """Обчислює периметр прямокутника."""
-        return 2 * (self.__width + self.__height)
+const getRandom = () => Math.floor(Math.random() * 100);
+const getCachedRandom = cacheWithTimeout(getRandom, 5000); // 5 seconds cache
 
-    def __str__(self):
-        return f"Rectangle(width={self.width}, height={self.height}, style={self.style}, {super().__str__()})"
-
-    def __eq__(self, other):
-        if not isinstance(other, Shape):
-            return NotImplemented
-        return self.area() == other.area()
-
-    def __lt__(self, other):
-        if not isinstance(other, Shape):
-            return NotImplemented
-        return self.area() < other.area()
-
-    def __gt__(self, other):
-        if not isinstance(other, Shape):
-            return NotImplemented
-        return self.area() > other.area()
-
-
-class Triangle(Shape):
-    """Клас для представлення трикутника."""
-    def __init__(self, color, side1, side2, side3, style, line_thickness, corners, opacity):
-        super().__init__(color)
-        # Перевірка нерівності трикутника
-        if not (side1 + side2 > side3 and side2 + side3 > side1 and side1 + side3 > side2):
-            raise ValueError("Неможливо створити трикутник із заданими сторонами")
-        self.__side1 = side1
-        self.__side2 = side2
-        self.__side3 = side3
-        self.__style = style
-        self.__line_thickness = line_thickness # Не використовується
-        self.__corners = corners # Не використовується
-        self.__opacity = opacity # Не використовується
-
-    @property
-    def side1(self):
-        return self.__side1
-
-    @property
-    def side2(self):
-        return self.__side2
-
-    @property
-    def side3(self):
-        return self.__side3
-
-    @property
-    def style(self):
-        return self.__style
-
-    def area(self):
-        """Обчислює площу трикутника за формулою Герона."""
-        s = (self.__side1 + self.__side2 + self.__side3) / 2
-        area_expr = s * (s - self.__side1) * (s - self.__side2) * (s - self.__side3)
-        return math.sqrt(area_expr) if area_expr > 0 else 0
-
-    def perimeter(self):
-        """Обчислює периметр трикутника."""
-        return self.__side1 + self.__side2 + self.__side3
-
-    def __str__(self):
-        return f"Triangle(sides=({self.side1}, {self.side2}, {self.side3}), style={self.style}, {super().__str__()})"
-
-    def __eq__(self, other):
-        if not isinstance(other, Shape):
-            return NotImplemented
-        return self.area() == other.area()
-
-    def __lt__(self, other):
-        if not isinstance(other, Shape):
-            return NotImplemented
-        return self.area() < other.area()
-
-    def __gt__(self, other):
-        if not isinstance(other, Shape):
-            return NotImplemented
-        return self.area() > other.area()
-
-
-def total_area(shapes):
-    """Обчислює сумарну площу всіх фігур у списку."""
-    return sum(shape.area() for shape in shapes)
-
-
-circle = Circle("red", 30, "solid", 1, 0, 0.9)
-rectangle = Rectangle("blue", 4, 5, "dashed", 2, 4, 0.8)
-triangle = Triangle("green", 3, 4, 5, "solid", 1, 3, 1.0)
-print("Cписок фігур:")
-print(circle)
-print(rectangle)
-print(triangle)
-shapes = [circle, rectangle, triangle]
-print("Площа усіх фігур:", total_area(shapes))
-print(circle > rectangle) # Порівняння площі
-print(rectangle < triangle) # Порівняння площі
-
+console.log(getCachedRandom());
+console.log(getCachedRandom()); // Should use cache
+setTimeout(() => { console.log(getCachedRandom()) }, 6000); // Should verify timeout
