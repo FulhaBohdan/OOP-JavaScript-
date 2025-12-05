@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Crypto Exchange</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; margin-top: 50px; }
+        .card { border: 1px solid #ddd; padding: 20px; display: inline-block; width: 300px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h1 { color: #333; }
+        .price { font-size: 2em; color: green; margin: 20px 0; }
+        .balance { text-align: left; margin-bottom: 20px; }
+        button { padding: 10px 20px; cursor: pointer; font-size: 1.1em; }
+        .btn-buy { background-color: #4CAF50; color: white; border: none; }
+        .btn-sell { background-color: #f44336; color: white; border: none; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Crypto Market</h2>
+        
+        <div>Current Price (USD):</div>
+        <div id="price" class="price">Loading...</div>
+
+        <div class="balance">
+            <p><strong>Balance USD:</strong> <span id="usd-balance">0</span> $</p>
+            <p><strong>Crypto Held:</strong> <span id="crypto-balance">0</span> coins</p>
+        </div>
+
+        <button class="btn-buy" onclick="trade('buy')">Buy (1 Coin)</button>
+        <button class="btn-sell" onclick="trade('sell')">Sell (1 Coin)</button>
+    </div>
+
+    <script>
+        const ws = new WebSocket('ws://localhost:3000');
+
+        ws.onmessage = (event) => {
+            const message = JSON.parse(event.data);
+
+            if (message.type === 'price_update') {
+                document.getElementById('price').innerText = message.price;
+            } 
+            else if (message.type === 'balance_update') {
+                document.getElementById('usd-balance').innerText = message.data.usd.toFixed(2);
+                document.getElementById('crypto-balance').innerText = message.data.crypto;
+            }
+        };
+
+        function trade(action) {
+            if (ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify({ type: action }));
+            } else {
+                alert("Connection lost");
+            }
+        }
+    </script>
+</body>
+</html>

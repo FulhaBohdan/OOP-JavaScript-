@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>SSE Chat</title>
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: 20px auto; }
+        #chat-box { border: 1px solid #ccc; height: 300px; overflow-y: scroll; padding: 10px; margin-bottom: 10px; }
+        .msg { margin-bottom: 5px; }
+        .time { color: #888; font-size: 0.8em; margin-right: 5px; }
+    </style>
+</head>
+<body>
+    <h2>SSE Chat Lab 7</h2>
+    <input type="text" id="username" placeholder="Ваше ім'я" required>
+    <div id="chat-box"></div>
+    
+    <input type="text" id="message" placeholder="Повідомлення" style="width: 70%;">
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+        const chatBox = document.getElementById('chat-box');
+        const eventSource = new EventSource('/events');
+
+        eventSource.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+            displayMessage(data);
+        };
+
+        function stringToColor(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                hash = str.charCodeAt(i) + ((hash << 5) - hash);
+            }
+            const c = (hash & 0x00FFFFFF).toString(16).toUpperCase();
+            return '#' + '00000'.substring(0, 6 - c.length) + c;
+        }
+
+        function displayMessage(data) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'msg';
+            const color = stringToColor(data.username);
+            
+            msgDiv.innerHTML = `
+                <span class="time">[${data.time}]</span>
+                <strong style="color:${color}">${data.username}:</strong> 
+                ${data.text}
+            `;
+            chatBox.appendChild(msgDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        async function sendMessage() {
+            const username = document.getElementById('username').value;
+            const text = document.getElementById('message').value;
+
+            if (!username || !text) return alert("Введіть ім'я та повідомлення!");
+
+            await fetch('/send-message', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, text })
+            });
+
+            document.getElementById('message').value = '';
+        }
+    </script>
+</body>
+</html>
