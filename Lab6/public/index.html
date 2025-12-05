@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 6 - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <aside>
+        <h2>Dashboard</h2>
+        <div id="weather-widget">
+            Loading...
+        </div>
+        
+        <div style="margin-top: auto; color: #718096; font-size: 0.8rem; text-align: center;">
+            &copy; 2025 Bohdan Fulha
+        </div>
+    </aside>
+
+    <main>
+        <h1>Лабораторна робота №6</h1>
+
+        <nav>
+            <button onclick="showSection('users')">👥 Користувачі</button>
+            <button onclick="showSection('gallery')" class="secondary">🖼️ Галерея</button>
+        </nav>
+
+        <div id="users-section">
+            <div class="toolbar">
+                <span>Управління списком:</span>
+                <button class="secondary" onclick="getUsers('name', 'asc')">А ➝ Я</button>
+                <button class="secondary" onclick="getUsers('name', 'desc')">Я ➝ А</button>
+            </div>
+            
+            <div id="users-container" class="grid-container">
+                </div>
+        </div>
+
+        <div id="gallery-section" style="display: none;">
+            <div id="gallery" class="gallery-grid"></div>
+        </div>
+    </main>
+
+    <script src="main.js"></script> 
+</body>
+</html>

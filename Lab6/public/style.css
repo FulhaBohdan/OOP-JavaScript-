@@ -1,0 +1,166 @@
+/* Скидання стандартних відступів */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1a202c; /* Темно-сірий фон */
+    color: #e2e8f0; /* Світлий текст */
+    display: flex; /* Робимо макет з боковою панеллю */
+    min-height: 100vh;
+}
+
+/* --- Бокова панель (Sidebar) --- */
+aside {
+    width: 280px;
+    background-color: #2d3748;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #4a5568;
+    box-shadow: 4px 0 10px rgba(0,0,0,0.1);
+}
+
+aside h2 {
+    margin-bottom: 20px;
+    color: #63b3ed; /* Блакитний заголовок */
+    font-size: 1.5rem;
+}
+
+/* Віджет погоди */
+#weather-widget {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(118, 75, 162, 0.4);
+    text-align: center;
+}
+
+#weather-widget h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+#weather-widget p {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* --- Основна частина (Main) --- */
+main {
+    flex: 1; /* Займає всю решту місця */
+    padding: 40px;
+    overflow-y: auto; /* Дозволяє скрол, якщо контенту багато */
+}
+
+h1 {
+    margin-bottom: 30px;
+    font-size: 2.2rem;
+    border-bottom: 2px solid #4a5568;
+    padding-bottom: 15px;
+}
+
+/* Меню навігації */
+nav {
+    margin-bottom: 30px;
+    display: flex;
+    gap: 15px;
+}
+
+/* Кнопки (загальний стиль) */
+button {
+    background-color: #4299e1;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+button:hover {
+    background-color: #3182ce;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(66, 153, 225, 0.3);
+}
+
+button.secondary {
+    background-color: #4a5568;
+}
+
+button.secondary:hover {
+    background-color: #718096;
+}
+
+/* Панель інструментів (сортування) */
+.toolbar {
+    background-color: #2d3748;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.toolbar span {
+    color: #a0aec0;
+    margin-right: auto; /* Відсуває кнопки вправо */
+}
+
+/* Сітка для карток */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* Картка користувача */
+.user-card {
+    background-color: #2d3748;
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 5px solid #4299e1; /* Кольорова смужка зліва */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.user-card:hover {
+    transform: scale(1.02);
+}
+
+.user-card h3 {
+    margin-bottom: 5px;
+    color: white;
+}
+
+.user-card p {
+    color: #a0aec0;
+    font-size: 0.9rem;
+}
+
+/* Галерея */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+.gallery-grid img:hover {
+    transform: scale(1.05);
+}
